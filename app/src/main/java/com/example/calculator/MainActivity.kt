@@ -16,27 +16,61 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         binding.oneButton.setOnClickListener {
+            if (equalpressed) {
+                binding.totalView.text = ""
+                equalpressed = false
+            }
+            if(lastFunction != ""){
+                binding.totalView.text = ""
+            }
             binding.totalView.append("1")
-            renew()
+            if (lastFunction == ""){
+                renew()
+            }
 
         }
         binding.twoButton.setOnClickListener {
+            if (equalpressed) {
+                binding.totalView.text = ""
+                equalpressed = false
+            }
+            if(lastFunction != ""){
+                binding.totalView.text = ""
+            }
             binding.totalView.append("2")
-            if (lastFunction == "") {
+            if (lastFunction == ""){
                 renew()
             }
 
 
         }
         binding.threeButton.setOnClickListener {
+            if (equalpressed) {
+                binding.totalView.text = ""
+                equalpressed = false
+            }
+            if(lastFunction != ""){
+                binding.totalView.text = ""
+            }
             binding.totalView.append("3")
-            renew()
+            if (lastFunction == ""){
+                renew()
+            }
 
 
         }
         binding.fourButton.setOnClickListener {
+            if (equalpressed) {
+                binding.totalView.text = ""
+                equalpressed = false
+            }
+            if(lastFunction != ""){
+                binding.totalView.text = ""
+            }
             binding.totalView.append("4")
-            renew()
+            if (lastFunction == ""){
+                renew()
+            }
 
 
         }
@@ -55,51 +89,102 @@ class MainActivity : AppCompatActivity() {
 
         }
         binding.sixButton.setOnClickListener {
+            if (equalpressed) {
+                binding.totalView.text = ""
+                equalpressed = false
+            }
+            if(lastFunction != ""){
+                binding.totalView.text = ""
+            }
             binding.totalView.append("6")
-            renew()
+            if (lastFunction == ""){
+                renew()
+            }
 
 
         }
         binding.sevenButton.setOnClickListener {
+            if (equalpressed) {
+                binding.totalView.text = ""
+                equalpressed = false
+            }
+            if(lastFunction != ""){
+                binding.totalView.text = ""
+            }
             binding.totalView.append("7")
-            renew()
+            if (lastFunction == ""){
+                renew()
+            }
 
 
         }
         binding.eightButton.setOnClickListener {
+            if (equalpressed) {
+                binding.totalView.text = ""
+                equalpressed = false
+            }
+            if(lastFunction != ""){
+                binding.totalView.text = ""
+            }
             binding.totalView.append("8")
-            renew()
+            if (lastFunction == ""){
+                renew()
+            }
 
 
         }
         binding.nineButton.setOnClickListener {
+            if (equalpressed) {
+                binding.totalView.text = ""
+                equalpressed = false
+            }
+            if(lastFunction != ""){
+                binding.totalView.text = ""
+            }
             binding.totalView.append("9")
-            renew()
+            if (lastFunction == ""){
+                renew()
+            }
 
 
         }
         binding.zeroButton.setOnClickListener {
+            if (equalpressed) {
+                binding.totalView.text = ""
+                equalpressed = false
+            }
+            if(lastFunction != ""){
+                binding.totalView.text = ""
+            }
             binding.totalView.append("0")
-            renew()
+            if (lastFunction == ""){
+                renew()
+            }
 
         }
         binding.multButton.setOnClickListener {
-            if (lastFunction == "multiply") {
+            if (lastFunction != "") {
                 equal()
             }
             lastFunction = "multiply"
         }
         binding.minusButton.setOnClickListener {
-            renew()
-            binding.totalView.text = "0"
+            if (lastFunction != "") {
+                equal()
+            }
+            lastFunction = "minus"
         }
         binding.slashButton.setOnClickListener {
-            renew()
-            binding.totalView.text = "0"
+            if (lastFunction != "") {
+                equal()
+            }
+            lastFunction = "divide"
         }
         binding.plusButton.setOnClickListener {
-            renew()
-            binding.totalView.text = "0"
+            if (lastFunction != "") {
+                equal()
+            }
+            lastFunction = "plus"
         }
         binding.equalButton.setOnClickListener {
             equal()
@@ -121,9 +206,24 @@ class MainActivity : AppCompatActivity() {
                 lastFunction = ""
                 renew()
             }
-            "divide" -> divide()
-            "plus" -> plus()
-            "minus" -> minus()
+            "divide" -> {
+                divide()
+                binding.totalView.text = memory.toString()
+                lastFunction = ""
+                renew()
+            }
+            "plus" -> {
+                plus()
+                binding.totalView.text = memory.toString()
+                lastFunction = ""
+                renew()
+            }
+            "minus" -> {
+                minus()
+                binding.totalView.text = memory.toString()
+                lastFunction = ""
+                renew()
+            }
 
         }
     }
@@ -145,15 +245,27 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun divide() {
-        null
+        if (equalpressed) {
+            memory = memory / binding.totalView.text.toString().toInt()
+        } else {
+            equal()
+        }
     }
 
     private fun plus() {
-        null
+        if (equalpressed) {
+            memory = memory + binding.totalView.text.toString().toInt()
+        } else {
+            equal()
+        }
     }
 
     private fun minus() {
-        null
+        if (equalpressed) {
+            memory = memory - binding.totalView.text.toString().toInt()
+        } else {
+            equal()
+        }
     }
 
 }
