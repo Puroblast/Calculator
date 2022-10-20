@@ -11,6 +11,8 @@ class MainActivity : AppCompatActivity() {
     private var memory = 0
     private var lastFunction = ""
     private var equalpressed = false
+    private var firstNumber = 0
+    private var firstFunction = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -163,26 +165,38 @@ class MainActivity : AppCompatActivity() {
 
         }
         binding.multButton.setOnClickListener {
-            if (lastFunction != "") {
+            if (lastFunction == "divide" || lastFunction == "multiply") {
                 equal()
+            } else if (lastFunction == "plus" || lastFunction == "minus") {
+                renew()
             }
             lastFunction = "multiply"
         }
         binding.minusButton.setOnClickListener {
+            firstNumber = binding.totalView.text.toString().toInt()
+            firstFunction = "minus"
             if (lastFunction != "") {
+                firstFunction = ""
                 equal()
+                lastFunction = "minus"
             }
             lastFunction = "minus"
         }
         binding.slashButton.setOnClickListener {
-            if (lastFunction != "") {
+            if (lastFunction == "divide" || lastFunction == "multiply") {
                 equal()
+            } else if (lastFunction == "plus" || lastFunction == "minus") {
+                renew()
             }
             lastFunction = "divide"
         }
         binding.plusButton.setOnClickListener {
+            firstNumber = binding.totalView.text.toString().toInt()
+            firstFunction = "plus"
             if (lastFunction != "") {
+                firstFunction = ""
                 equal()
+                lastFunction = "plus"
             }
             lastFunction = "plus"
         }
@@ -193,6 +207,8 @@ class MainActivity : AppCompatActivity() {
             binding.totalView.text = ""
             equalpressed = false
             lastFunction = ""
+            firstFunction = ""
+            firstNumber = 0
         }
     }
 
@@ -204,28 +220,35 @@ class MainActivity : AppCompatActivity() {
                 multiply()
                 binding.totalView.text = memory.toString()
                 lastFunction = ""
-                renew()
             }
             "divide" -> {
                 divide()
                 binding.totalView.text = memory.toString()
                 lastFunction = ""
-                renew()
             }
             "plus" -> {
                 plus()
                 binding.totalView.text = memory.toString()
                 lastFunction = ""
-                renew()
+                firstFunction = ""
             }
             "minus" -> {
                 minus()
                 binding.totalView.text = memory.toString()
                 lastFunction = ""
-                renew()
+                firstFunction = ""
             }
-
         }
+
+        if (firstFunction == "plus") {
+            memory += firstNumber
+            firstFunction = ""
+        } else if (firstFunction == "minus") {
+            memory -= firstNumber
+            firstFunction = ""
+        }
+        binding.totalView.text = memory.toString()
+        renew()
     }
 
     private fun renew() {
