@@ -11,7 +11,7 @@
         android:id="@+id/totalView"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        tools:text="@string/mainWindowView"
+        android:text="@string/mainWindowView"
         android:background="@color/light_gray"
         android:textSize="40sp"
         android:gravity="bottom|end"
